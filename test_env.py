@@ -8,3 +8,6 @@ load_dotenv()
 key = os.getenv("OPENAI_API_KEY")
 
 print(key)
+
+print("项目启动")
+print(key)
