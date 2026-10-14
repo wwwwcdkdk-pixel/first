@@ -4,6 +4,8 @@ import os
 from unittest import result
 from venv import logger
 from fastapi import FastAPI,HTTPException 
+from unittest.mock import MagicMock, patch
+
 
 app = FastAPI()
 
@@ -20,7 +22,7 @@ def get_products():
             password=os.getenv("MYSQL_PASSWORD"),
             database=os.getenv("MYSQL_DATABASE"),
             connect_timeout=5
-    )   
+        )
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
             cursor.execute("SELECT * FROM products;")
             result = cursor.fetchall()
@@ -29,7 +31,7 @@ def get_products():
         raise HTTPException(status_code=500, detail="Database error")
     finally:
         if conn is not None:
-            conn.close()        
+            conn.close()
     return result
 
 
